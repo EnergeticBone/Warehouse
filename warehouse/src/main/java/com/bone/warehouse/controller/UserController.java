@@ -1,10 +1,12 @@
 package com.bone.warehouse.controller;
 
+import com.bone.warehouse.dto.request.ApiResponse;
 import com.bone.warehouse.dto.request.UserCreateRequest;
 import com.bone.warehouse.dto.request.UserDeleteRequest;
 import com.bone.warehouse.dto.request.UserUpdateRequest;
 import com.bone.warehouse.entity.User;
 import com.bone.warehouse.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,18 +18,24 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users")
-    User createUser(@RequestBody UserCreateRequest request) {
-        return userService.createUser(request);
+    ApiResponse<User> createUser(@RequestBody @Valid UserCreateRequest request) {
+        ApiResponse<User> response = new ApiResponse<>();
+        response.setResult(userService.createUser(request));
+        return response;
     }
 
     @GetMapping("/users")
-    List<User> getUsers() {
-        return userService.getUsers();
+    ApiResponse<List<User>> getUsers() {
+        ApiResponse<List<User>> response = new ApiResponse<>();
+        response.setResult(userService.getUsers());
+        return response;
     }
 
     @GetMapping("/users/{id}")
-    User  getUserById(@PathVariable String id){
-        return userService.getUserById(id);
+    ApiResponse<User> getUserById(@PathVariable String id){
+        ApiResponse<User> response = new ApiResponse<>();
+        response.setResult(userService.getUserById(id));
+        return response;
     }
 
     @PutMapping("/users/{id}")

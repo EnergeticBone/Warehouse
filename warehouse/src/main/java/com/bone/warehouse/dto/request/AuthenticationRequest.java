@@ -1,16 +1,15 @@
 package com.bone.warehouse.dto.request;
 
-import jakarta.validation.constraints.AssertTrue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class UserDeleteRequest {
-    @AssertTrue(message = "User is already deleted")
-    private boolean isDeleted;
+public class AuthenticationRequest {
+    private String username;
+    private String password;
 }
